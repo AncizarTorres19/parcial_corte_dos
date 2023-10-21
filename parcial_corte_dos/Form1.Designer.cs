@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.txtTipo = new System.Windows.Forms.TextBox();
             this.txtMarca = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtPlaca = new System.Windows.Forms.TextBox();
@@ -49,6 +48,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.lblCantidadVehiculos = new System.Windows.Forms.Label();
             this.lblDineroRecaudado = new System.Windows.Forms.Label();
+            this.txtTipo = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,13 +61,6 @@
             this.label1.Size = new System.Drawing.Size(87, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Tipo de Vehiculo";
-            // 
-            // txtTipo
-            // 
-            this.txtTipo.Location = new System.Drawing.Point(46, 37);
-            this.txtTipo.Name = "txtTipo";
-            this.txtTipo.Size = new System.Drawing.Size(200, 20);
-            this.txtTipo.TabIndex = 1;
             // 
             // txtMarca
             // 
@@ -96,9 +90,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(43, 99);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 13);
+            this.label3.Size = new System.Drawing.Size(34, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Tipo del Placa";
+            this.label3.Text = "Placa";
             // 
             // txtHoraEntrada
             // 
@@ -220,11 +214,33 @@
             this.lblDineroRecaudado.TabIndex = 14;
             this.lblDineroRecaudado.Text = "Dinero recaudado:";
             // 
+            // txtTipo
+            // 
+            this.txtTipo.FormattingEnabled = true;
+            this.txtTipo.Items.AddRange(new object[] {
+            "Automóvil",
+            "Motocicleta"});
+            this.txtTipo.Location = new System.Drawing.Point(46, 37);
+            this.txtTipo.Name = "txtTipo";
+            this.txtTipo.Size = new System.Drawing.Size(200, 21);
+            this.txtTipo.TabIndex = 15;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(273, 315);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "label7";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1466, 450);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtTipo);
             this.Controls.Add(this.lblDineroRecaudado);
             this.Controls.Add(this.lblCantidadVehiculos);
             this.Controls.Add(this.label6);
@@ -238,7 +254,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtMarca);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtTipo);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -251,7 +266,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtTipo;
         private System.Windows.Forms.TextBox txtMarca;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtPlaca;
@@ -271,6 +285,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblCantidadVehiculos;
         private System.Windows.Forms.Label lblDineroRecaudado;
+        private System.Windows.Forms.ComboBox txtTipo;
+        private System.Windows.Forms.Label label7;
     }
 }
 
