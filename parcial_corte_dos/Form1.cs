@@ -66,7 +66,7 @@ namespace parcial_corte_dos
             vehiculos.Add(vehiculo);
 
             //Se Agrega informacion a la tabla
-            dgvVehiculos.Rows.Add(tipo, marca, placa, horaEntrada, horaSalida, costo);
+            dgvVehiculos.Rows.Add(tipo == 0 ? "Automóvil" : "Motocicleta", marca, placa, horaEntrada, horaSalida, costo);
 
             totalDineroRecaudado += vehiculo.Costo;
             totalCantidadVehiculos++;
@@ -99,33 +99,25 @@ namespace parcial_corte_dos
 
             // Calcula el tiempo en minutos redondeando hacia arriba
             int minutosTotales = (int)Math.Ceiling(tiempoEstacionado.TotalMinutes);
-            label12.Text = minutosTotales.ToString();
+            int horasCompletas = minutosTotales / 60;
+            int minutosRestantes = minutosTotales % 60;
+
             if (minutosTotales >= 60)
             {
-                int horasCompletas = minutosTotales / 60;
-                int minutosRestantes = minutosTotales % 60;
-                label7.Text = horasCompletas.ToString();
-                label8.Text = minutosRestantes.ToString();
-
                 costo = horasCompletas * valorPorHora;
-
-                label9.Text = costo.ToString();
 
                 // Calcula el costo adicional por fracción cada 15 minutos
                 if (minutosRestantes > 0)
                 {
                     int fracciones = minutosRestantes / 15;
-                    //costo += fracciones * valorPorFraccion;
                     costo += fracciones * (valorPorHora / 4);
-                    label10.Text = fracciones.ToString();
-
                 }
             }
             else
             {
                 // Si el tiempo estacionado es menor a una hora, se aplica el valor por fracción
-                label11.Text = "else";
-                costo = valorPorHora / 4;
+                int fracciones = minutosRestantes / 15;
+                costo += fracciones * (valorPorHora / 4);
             }
 
             return costo;
