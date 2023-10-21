@@ -60,7 +60,7 @@ namespace parcial_corte_dos
             DateTime horaSalida = DateTime.Parse(txtHoraSalida.Text);
 
             TimeSpan tiempoEstacionado = horaSalida - horaEntrada;
-            double costo = CalcularCosto(tiempoEstacionado, CalcularValor(tipo), CalcularValor(tipo)/4);
+            double costo = CalcularCosto(tiempoEstacionado, CalcularValor(tipo));
 
             Vehiculo vehiculo = new Vehiculo(tipo, marca, placa, horaEntrada, horaSalida, costo);
             vehiculos.Add(vehiculo);
@@ -82,39 +82,50 @@ namespace parcial_corte_dos
 
             if (tipo == 0)
             {
-                label7.Text = "0";
                 valor = ValorPorHoraAuto;
             }
             else
             {
-                label7.Text = "1";
+          
                 valor = ValorPorHoraMoto;
             }
 
             return valor;
         }
 
-        private double CalcularCosto(TimeSpan tiempoEstacionado, double valorPorHora, double valorPorFraccion)
+        private double CalcularCosto(TimeSpan tiempoEstacionado, double valorPorHora)
         {
             double costo = 0;
 
-            if (tiempoEstacionado.TotalHours >= 1)
+            // Calcula el tiempo en minutos redondeando hacia arriba
+            int minutosTotales = (int)Math.Ceiling(tiempoEstacionado.TotalMinutes);
+            label12.Text = minutosTotales.ToString();
+            if (minutosTotales >= 60)
             {
-                int horas = (int)tiempoEstacionado.TotalHours;
-                double minutos = tiempoEstacionado.Minutes;
+                int horasCompletas = minutosTotales / 60;
+                int minutosRestantes = minutosTotales % 60;
+                label7.Text = horasCompletas.ToString();
+                label8.Text = minutosRestantes.ToString();
 
-                if (minutos > 0)
+                costo = horasCompletas * valorPorHora;
+
+                label9.Text = costo.ToString();
+
+                // Calcula el costo adicional por fracción cada 15 minutos
+                if (minutosRestantes > 0)
                 {
-                    // Si hay fracción de hora, se cuenta como una hora completa
-                    horas += 1;
-                }
+                    int fracciones = minutosRestantes / 15;
+                    //costo += fracciones * valorPorFraccion;
+                    costo += fracciones * (valorPorHora / 4);
+                    label10.Text = fracciones.ToString();
 
-                costo = horas * valorPorHora;
+                }
             }
             else
             {
                 // Si el tiempo estacionado es menor a una hora, se aplica el valor por fracción
-                costo = valorPorFraccion;
+                label11.Text = "else";
+                costo = valorPorHora / 4;
             }
 
             return costo;
